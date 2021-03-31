@@ -1,0 +1,45 @@
+<p-table #dt [columns]="cols" [value]="products" selectionMode="multiple">
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex">
+      <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-mr-2" pTooltip="CSV"
+        tooltipPosition="bottom"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+        class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2"
+        pTooltip="PDF" tooltipPosition="bottom"></button>
+      <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="tableToExcel('data_table','sayed')"
+        class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns" style="background-color: cyan;">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<table id="data_table">
+  <thead>
+    <tr>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
+    </tr> 
+  </thead>
+  <tbody>
+    <tr *ngFor="let rowData of products">
+      <td *ngFor="let col of cols ;let i = index" style="background-color: cyan;" colspan="2">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </tbody>
+</table>
